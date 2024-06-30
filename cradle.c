@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "fns.h"
+
 #define TAB '\t'
 #define BYTE unsigned char
 #define BUFSIZ 1024
@@ -99,7 +101,8 @@ GetNum(void)
 void
 Emit(BYTE *s)
 {
-     printf("\t%s", s);
+     putchar('\t');
+     fputs(s, stdout);
 }
 
 /* Output a String with Tab and LF */
@@ -112,7 +115,7 @@ EmitLn(BYTE *s)
 
 /* Parse and Translate a Math Expression */
 void
-Expression(void)
+Term(void)
 {
      BYTE s[BUFSIZ];
      int num = GetNum();
@@ -120,7 +123,45 @@ Expression(void)
      EmitLn(s);
 	  
 }
-	  
+
+/* Parse and Translate an Expression */
+void
+Expression(void)     
+{
+     Term();
+     EmitLn("mov r17, r16");
+
+     switch (Look) {
+     case '+':
+	  Add();
+	  break;
+     case '-':
+	  Substract();
+	  break;
+     default:
+	  Expected("Addop");
+	  break;
+     }
+}
+
+/* Recognize and Translate an Add */
+void
+Add(void)
+{
+     Match('+');
+     Term();
+     EmitLn("add r17, r16");
+}
+
+/* Recognize and Translate a Substract */
+void
+Substract(void)
+{
+     Match('-');
+     Term();
+     EmitLn("sub r17, r16");
+}
+
 /* Initialize and Main Program */
 int
 main(void)
