@@ -10,6 +10,7 @@
 
 int Look; /* Lookahead Character */
 
+
 /* Read New Character From Input Stream */
 void
 GetChar(void)
@@ -22,7 +23,14 @@ GetChar(void)
 void
 Error(BYTE *s)
 {
-     printf("\n Error %s . \n", s);
+     BYTE error_str[BUFSIZ];
+     
+     strlcpy(error_str, "\n Error ", BUFSIZ);
+     strlcat(error_str, s, BUFSIZ);
+     strlcat(error_str, " .", BUFSIZ);
+     
+     puts(error_str);
+     
 }
 
 /* Report Error and Halt */
@@ -37,8 +45,10 @@ Abort(BYTE *s)
 void
 Expected(BYTE *s)
 {
-     strlcat(s, " Expected", BUFSIZ);
-     Abort(s);
+     BYTE error_str[BUFSIZ];
+     strlcpy(error_str, s, BUFSIZ);
+     strlcat(error_str, " Expected", BUFSIZ);
+     Abort(error_str);
 }
 
 /* Match a Specific Input Character */
@@ -48,8 +58,6 @@ Match(int x)
      extern int Look;
      BYTE s[BUFSIZ];
      
-
-
      if (Look != x){
 	  snprintf(s, BUFSIZ, "'''' %c ''''", x);
 	  Expected(s);	  
@@ -96,15 +104,27 @@ Emit(BYTE *s)
 
 /* Output a String with Tab and LF */
 void
-EmitLN(BYTE *s)
+EmitLn(BYTE *s)
 {
      Emit(s);
      putchar('\n');
 }
 
+/* Parse and Translate a Math Expression */
+void
+Expression(void)
+{
+     BYTE s[BUFSIZ];
+     int num = GetNum();
+     snprintf(s, BUFSIZ, "ldi r16, %c", num);
+     EmitLn(s);
+	  
+}
+	  
 /* Initialize and Main Program */
 int
 main(void)
 {
      GetChar();
+     Expression();
 }
