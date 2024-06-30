@@ -1,0 +1,24 @@
+** Compiler adventure
+
+Attempt to solve exercises from very old compiler book for newbies.
+
+Link to the book:
+Let's Build a Compiler, by Jack Crenshaw
+https://compilers.iecc.com/crenshaw/
+
+It's seems to be very easy book achually.
+
+*** Difference of my implementation from the book
+
+| Aspect          | Used in book | Used in my repo    |
+| Language        | Pascal       | C                  |
+| Compiler        | TurboPascal  | clang / any modern |
+| Target Assembly | 68000        | Atmel AVR  / avra  |
+| Target Platform | SK*DOS       | ATmega16 MCU       |
+
+*** todos
+
+**** TODO Finish tutor2.doc
+
+**** TODO port avra on OpenBSD
+https://github.com/Ro5bert/avra
