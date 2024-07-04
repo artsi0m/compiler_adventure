@@ -30,8 +30,8 @@ Error(BYTE *s)
      strlcpy(error_str, "\n Error ", BUFSIZ);
      strlcat(error_str, s, BUFSIZ);
      strlcat(error_str, " .", BUFSIZ);
-     
-     puts(error_str);
+
+     fputs(error_str, stderr);
      
 }
 
