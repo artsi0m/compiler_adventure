@@ -4,3 +4,7 @@ a.out.core
 
 # Emacs autosave
 *~
+
+# Object files
+*.d
+*.o
