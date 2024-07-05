@@ -23,13 +23,13 @@ void
 Error(BYTE *s)
 {
      BYTE error_str[BUFSIZ];
-     
+
      strlcpy(error_str, "\n Error ", BUFSIZ);
      strlcat(error_str, s, BUFSIZ);
      strlcat(error_str, " .", BUFSIZ);
 
      fputs(error_str, stderr);
-     
+
 }
 
 /* Report Error and Halt */
@@ -56,13 +56,13 @@ Match(int x)
 {
      extern int Look;
      BYTE s[BUFSIZ];
-     
+
      if (Look != x){
 	  snprintf(s, BUFSIZ, "'''' %c ''''", x);
-	  Expected(s);	  
+	  Expected(s);
      }
 
-     GetChar();     
+     GetChar();
 }
 
 /* Get an Identifier */
@@ -70,10 +70,10 @@ int
 GetName(void){
      extern int Look;
      int ch;
-     
+
      if (isalpha(Look) == 0)
 	  Expected("Name");
-     
+
      ch = toupper(Look);
      GetChar();
      return ch;
@@ -85,7 +85,7 @@ GetNum(void)
 {
      extern int Look;
      int ch;
-     
+
      if (isdigit(Look) == 0)
 	  Expected("Integer");
 
