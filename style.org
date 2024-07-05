@@ -1,0 +1,32 @@
+** Notes on used style
+
+This is not some sort of guiding or prescribing document,
+but rather a description of style of code I already started writing by now.
+
+
+*** CamelCase functions mixed with more obvious for C naming
+
+Original book is written with examples in turbo pascal.
+I started rewriting it in C and decided to preserve style of naming of functions,
+that appeared first in the book and wouldn't be introduced by myself.
+
+*** K&R indent
+
+Just =c-set-style= to =k&r= in emacs.
+
+
+*** strlcpy and strlcat functions
+
+Trying to follow KNF to some extent and use
+advantages of the OpenBSD and latest POSIX standard.
+
+*** fns.h and dat.h headers
+
+I put function prototypes into fns.h
+and some C preprocessor constans into dat.h as 9front style from aiju.de stated.
+
+
+*** BYTE as a short form of writing unsigned char
+
+I really love how it is close to truth and
+writing  byte with =M-b M-u= to upcase is very easy.
