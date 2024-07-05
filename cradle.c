@@ -127,7 +127,7 @@ Expression(void)
 {
      Term();
      while (Look == '+' || Look == '-'){
-     	EmitLn("mov r17, r16");
+	EmitLn("push r16");
 
      	switch (Look) {
      	case '+':
@@ -149,6 +149,7 @@ Add(void)
 {
      Match('+');
      Term();
+     EmitLn("pop r17");
      EmitLn("add r17, r16");
 }
 
@@ -158,6 +159,7 @@ Substract(void)
 {
      Match('-');
      Term();
+     EmitLn("pop r17");
      EmitLn("sub r17, r16");
 }
 
@@ -165,6 +167,12 @@ Substract(void)
 int
 main(void)
 {
+     /* EmitLn(";; Setting stack for function calls");
+	 EmitLn("ldi r16, high(RAMEND)");
+	 EmitLn("out SPH, r16");
+	 EmitLn("ldi r16, low(RAMEND)");
+	 EmitLn("out SPL, r16)"); */
+
      GetChar();
      Expression();
 }
