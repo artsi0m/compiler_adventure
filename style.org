@@ -30,3 +30,8 @@ and some C preprocessor constans into dat.h as 9front style from aiju.de stated.
 
 I really love how it is close to truth and
 writing  byte with =M-b M-u= to upcase is very easy.
+
+*** functions that takes void and returns void and change external state
+
+This is because I tried to follow tutorial
+and it is written with short Pascal procedures.
