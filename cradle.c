@@ -5,10 +5,7 @@
 #include <string.h>
 
 #include "fns.h"
-
-#define TAB '\t'
-#define BYTE unsigned char
-#define BUFSIZ 1024
+#include "dat.h"
 
 int Look; /* Lookahead Character */
 
