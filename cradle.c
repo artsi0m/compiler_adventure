@@ -118,26 +118,28 @@ Term(void)
      int num = GetNum();
      snprintf(s, BUFSIZ, "ldi r16, %c", num);
      EmitLn(s);
-	  
+
 }
 
 /* Parse and Translate an Expression */
 void
-Expression(void)     
+Expression(void)
 {
      Term();
-     EmitLn("mov r17, r16");
+     while (Look == '+' || Look == '-'){
+     	EmitLn("mov r17, r16");
 
-     switch (Look) {
-     case '+':
-	  Add();
-	  break;
-     case '-':
-	  Substract();
-	  break;
-     default:
-	  Expected("Addop");
-	  break;
+     	switch (Look) {
+     	case '+':
+     		  Add();
+     		  break;
+     	case '-':
+     		  Substract();
+     		  break;
+     	default:
+     		  Expected("Addop");
+     		  break;
+     	}
      }
 }
 
