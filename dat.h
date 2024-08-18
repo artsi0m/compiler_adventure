@@ -1,3 +1,5 @@
 #define TAB '\t'
-#define BUFSIZ 1024
 
+#if !defined( BUFSIZ )
+  #define BUFSIZ 1024
+#endif
