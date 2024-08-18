@@ -1,4 +1,8 @@
-/* program Cradle */
+/* Local Variables: */
+/* compile-command: "cc -Wall -Wextra -lbsd cradle.c" */
+/* End: */
+
+/* program Cradle  */
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
