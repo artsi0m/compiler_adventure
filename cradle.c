@@ -186,10 +186,18 @@ void
 Factor(void)
 {
      char s[BUFSIZ];
-     int num = GetNum();
-     snprintf(s, BUFSIZ, "ldi r16, %c", num);
-     EmitLn(s);
+     int num;
 
+     if (Look == '('){
+	  Match('(');
+	  Expression();
+	  Match(')');
+
+     } else {
+	  num = GetNum();
+	  snprintf(s, BUFSIZ, "ldi r16, %c", num);
+	  EmitLn(s);
+     }
 }
 
 void
