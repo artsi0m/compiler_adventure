@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "fns.h"
 #include "dat.h"
@@ -140,23 +141,28 @@ Term(void)
 void
 Expression(void)
 {
-     Term();
-     while (Look == '+' || Look == '-'){
-	EmitLn("push r16");
+     if (IsAddop(Look) == true ){
+	  EmitLn("clr r16");
+     } else {
+	  Term();
+     }
 
-	switch (Look) {
-	case '+':
-		  Add();
-		  break;
-	case '-':
-		  Substract();
-		  break;
-	default:
-		  Expected("Addop");
-		  break;
-	}
+     while (IsAddop(Look) == true){
+	  EmitLn("push r16");
+	  switch (Look) {
+	  case '+':
+	       Add();
+	       break;
+	  case '-':
+	       Substract();
+	       break;
+	  default:
+	       Expected("Addop");
+	       break;
+	  }
      }
 }
+
 
 /* Recognize and Translate an Add */
 void
@@ -213,6 +219,12 @@ Divide(void)
      Factor();
      EmitLn(";; THERE IS NO DIV in AVR");
      EmitLn(";; think how to implement subprogram");
+}
+
+bool
+IsAddop(char ch)
+{
+     return ch == '+' || ch == '-' ? true : false;
 }
 
 /* Initialize and Main Program of Cradle */
