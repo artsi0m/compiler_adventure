@@ -110,16 +110,30 @@ EmitLn(char *s)
      putchar('\n');
 }
 
-/* Parse and Translate a Math Expression */
+/* Parse and Translate a Math Term */
 void
 Term(void)
 {
-     char s[BUFSIZ];
-     int num = GetNum();
-     snprintf(s, BUFSIZ, "ldi r16, %c", num);
-     EmitLn(s);
+     Factor();
+     while (Look == '/' || Look == '*'){
+	  EmitLn("push r16");
+	  switch(Look){
+	  case '*':
+	       Multiply();
+	       break;
+	  case '/':
+	       Divide();
+	       break;
+	  default:
+		  Expected("Mulop");
+		  break;
+
+
+	  }
+     }
 
 }
+
 
 /* Parse and Translate an Expression */
 void
@@ -129,17 +143,17 @@ Expression(void)
      while (Look == '+' || Look == '-'){
 	EmitLn("push r16");
 
-     	switch (Look) {
-     	case '+':
-     		  Add();
-     		  break;
-     	case '-':
-     		  Substract();
-     		  break;
-     	default:
-     		  Expected("Addop");
-     		  break;
-     	}
+	switch (Look) {
+	case '+':
+		  Add();
+		  break;
+	case '-':
+		  Substract();
+		  break;
+	default:
+		  Expected("Addop");
+		  break;
+	}
      }
 }
 
@@ -163,23 +177,51 @@ Substract(void)
      EmitLn("sub r17, r16");
 }
 
+/* Parse and Translate a Math Factor */
 void
 Factor(void)
 {
      char s[BUFSIZ];
      int num = GetNum();
-     
+     snprintf(s, BUFSIZ, "ldi r16, %c", num);
+     EmitLn(s);
+
 }
+
+void
+Multiply(void)
+{
+  Match('*');
+  Factor();
+  EmitLn("pop r17");
+  EmitLn("muls r17, r16");
+}
+
+void
+Divide(void)
+{
+     Match('/');
+     Factor();
+     EmitLn(";; THERE IS NO DIV in AVR");
+     EmitLn(";; think how to implement subprogram");
+}
+
 /* Initialize and Main Program */
 int
 main(void)
 {
-     /* EmitLn(";; Setting stack for function calls");
-	 EmitLn("ldi r16, high(RAMEND)");
-	 EmitLn("out SPH, r16");
-	 EmitLn("ldi r16, low(RAMEND)");
-	 EmitLn("out SPL, r16)"); */
+
+#if 0
+
+     EmitLn(";; Setting stack for function calls");
+     EmitLn("ldi r16, high(RAMEND)");
+     EmitLn("out SPH, r16");
+     EmitLn("ldi r16, low(RAMEND)");
+     EmitLn("out SPL, r16)");
+
+#endif
 
      GetChar();
      Expression();
 }
+
