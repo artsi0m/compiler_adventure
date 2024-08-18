@@ -15,10 +15,3 @@ It's seems to be very easy book achually.
 | Compiler        | TurboPascal  | clang / any modern |
 | Target Assembly | 68000        | Atmel AVR  / avra  |
 | Target Platform | SK*DOS       | ATmega16 MCU       |
-
-*** todos
-
-**** TODO Finish tutor2.doc
-
-**** TODO port avra on OpenBSD
-https://github.com/Ro5bert/avra
