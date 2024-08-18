@@ -215,7 +215,7 @@ Divide(void)
      EmitLn(";; think how to implement subprogram");
 }
 
-/* Initialize and Main Program */
+/* Initialize and Main Program of Cradle */
 int
 main(void)
 {
