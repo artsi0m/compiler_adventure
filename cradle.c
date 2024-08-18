@@ -20,9 +20,9 @@ GetChar(void)
 
 /* Report an Error */
 void
-Error(BYTE *s)
+Error(char *s)
 {
-     BYTE error_str[BUFSIZ];
+     char error_str[BUFSIZ];
 
      strlcpy(error_str, "\n Error ", BUFSIZ);
      strlcat(error_str, s, BUFSIZ);
@@ -34,7 +34,7 @@ Error(BYTE *s)
 
 /* Report Error and Halt */
 void
-Abort(BYTE *s)
+Abort(char *s)
 {
      Error(s);
      exit(1);
@@ -42,9 +42,9 @@ Abort(BYTE *s)
 
 /* Report What Was Expected */
 void
-Expected(BYTE *s)
+Expected(char *s)
 {
-     BYTE error_str[BUFSIZ];
+     char error_str[BUFSIZ];
      strlcpy(error_str, s, BUFSIZ);
      strlcat(error_str, " Expected", BUFSIZ);
      Abort(error_str);
@@ -55,7 +55,7 @@ void
 Match(int x)
 {
      extern int Look;
-     BYTE s[BUFSIZ];
+     char s[BUFSIZ];
 
      if (Look != x){
 	  snprintf(s, BUFSIZ, "'''' %c ''''", x);
@@ -96,7 +96,7 @@ GetNum(void)
 
 /* Output a String with Tab */
 void
-Emit(BYTE *s)
+Emit(char *s)
 {
      putchar('\t');
      fputs(s, stdout);
@@ -104,7 +104,7 @@ Emit(BYTE *s)
 
 /* Output a String with Tab and LF */
 void
-EmitLn(BYTE *s)
+EmitLn(char *s)
 {
      Emit(s);
      putchar('\n');
@@ -114,7 +114,7 @@ EmitLn(BYTE *s)
 void
 Term(void)
 {
-     BYTE s[BUFSIZ];
+     char s[BUFSIZ];
      int num = GetNum();
      snprintf(s, BUFSIZ, "ldi r16, %c", num);
      EmitLn(s);
@@ -163,6 +163,13 @@ Substract(void)
      EmitLn("sub r17, r16");
 }
 
+void
+Factor(void)
+{
+     char s[BUFSIZ];
+     int num = GetNum();
+     
+}
 /* Initialize and Main Program */
 int
 main(void)
