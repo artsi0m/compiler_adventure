@@ -6,10 +6,11 @@ Link to the book:
 Let's Build a Compiler, by Jack Crenshaw
 https://compilers.iecc.com/crenshaw/
 
-It's seems to be very easy book achually.
+It's seems to be very easy book actually.
 
 *** Difference of my implementation from the book
 
+**** First attempt
 | Aspect          | Used in book | Used in my repo    |
 | Language        | Pascal       | C                  |
 | Compiler        | TurboPascal  | clang / any modern |
